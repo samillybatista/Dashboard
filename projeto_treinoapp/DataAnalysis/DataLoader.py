@@ -3,7 +3,11 @@ import pandas as pd
 import datetime
 import locale
 
-locale.setlocale(locale.LC_TIME, 'pt_BR.utf8')
+# Tenta configurar para português, mas usa um padrão seguro caso não esteja disponível
+try:
+    locale.setlocale(locale.LC_TIME, 'pt_BR.utf8')
+except locale.Error:
+    locale.setlocale(locale.LC_TIME, 'C')  # Fallback para um locale padrão compatível
 
 class DataLoader:
     def __init__(self, file_path):
